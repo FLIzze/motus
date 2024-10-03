@@ -1,0 +1,86 @@
+.gridHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.grid {
+    width: 60px;
+    height: 60px;
+    border-radius: 10%;
+    font-size: 30px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #0E0E0F;
+    font-weight: bold;
+}
+
+.rowDirection {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.lastAttempt {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+}
+
+.shakeAnimation {
+    animation-name: shake;
+    animation-duration: 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-10px);
+    }
+
+    15% {
+        transform: translateX(10px);
+    }
+
+    30% {
+        transform: translateX(-10px);
+    }
+
+    45% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
+
+    90% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.jumpAnimation {
+    animation-name: jump;
+    animation-duration: 0.5s;
+}
+
+@keyframes jump {
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}

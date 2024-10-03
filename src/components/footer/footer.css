@@ -1,0 +1,40 @@
+.input {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    width: 29%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.letter {
+    background-color: #5A5A5A;
+    border: none;
+    padding: 15px;
+    border-radius: 10%;
+    font-size: 21px;
+    display: flex;
+    width: 50px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.letter:hover {
+    color: gray;
+    background-color: white;
+    transition: all 0.1s;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.img {
+    background-color: #5A5A5A;
+}
