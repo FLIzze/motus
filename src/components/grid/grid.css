@@ -84,3 +84,32 @@
         transform: translateY(0px);
     }
 }
+
+.errorMessage {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reloadButton {
+    padding: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    border-radius: 10%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    width: fit-content;
+}
+
+.reloadButton:hover {
+    filter: invert(1);
+    transition: all 0.3s;
+}
+
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

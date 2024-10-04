@@ -1,14 +1,15 @@
+import { useAtom } from 'jotai';
 import './grid.css';
+import { animationAtom, currentRowAtom, currentWordAtom, errorMessageAtom, wordAtom, wordsTriedAtom } from '../../atom';
 
-interface GridProps {
-    word: string,
-    currentWord: string,
-    currentRow: number,
-    wordsTried: string[],
-    animation: string
-}
+const Grid = () => {
+    const [word] = useAtom(wordAtom);
+    const [currentRow] = useAtom(currentRowAtom);
+    const [currentWord] = useAtom(currentWordAtom);
+    const [wordsTried] = useAtom(wordsTriedAtom);
+    const [animation] = useAtom(animationAtom);
+    const [errorMessage] = useAtom(errorMessageAtom);
 
-const Grid = ({ word, currentWord, currentRow, wordsTried, animation }: GridProps) => {
     return (
         <body>
             <div className="gridHolder">
@@ -41,6 +42,16 @@ const Grid = ({ word, currentWord, currentRow, wordsTried, animation }: GridProp
                         ))}
                     </div>
                 ))}
+
+                {errorMessage !== "" && (
+                    <div className='errorContainer'>
+                        <p className='errorMessage'>{errorMessage}</p>
+                        <button
+                            onClick={() => location.reload()}
+                            className='reloadButton'
+                        >RELOAD</button>
+                    </div>
+                )}
             </div>
         </body>
     )

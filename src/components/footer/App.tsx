@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import "./footer.css";
+import { useAtom } from "jotai";
+import { currentWordAtom } from "../../atom";
 
-interface FooterProps {
-    setCurrentWord: React.Dispatch<React.SetStateAction<string>>
-}
-
-const Footer = ({ setCurrentWord }: FooterProps) => {
+const Footer = () => {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const [, setCurrentWord] = useAtom(currentWordAtom);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {

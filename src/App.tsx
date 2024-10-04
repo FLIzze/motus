@@ -1,19 +1,20 @@
+"use client";
+
 import Footer from "./components/footer/App";
 import Grid from "./components/grid/App";
 import './App.css';
-import { useEffect, useState } from "react";
-import motsFrancais from "./frenchWords";
+import { useEffect } from "react";
+import axios from 'axios';
+import { animationAtom, currentRowAtom, currentWordAtom, errorMessageAtom, wordAtom, wordsTriedAtom } from "./atom";
+import { useAtom } from "jotai";
 
 const App = () => {
-  const [word, setWord] = useState<string>("UUIDV4IFEBAF39HF#(#(#FEFAENO");
-
-  const [currentWord, setCurrentWord] = useState<string>("");
-
-  const [currentRow, setCurrentRow] = useState<number>(0);
-
-  const [wordsTried, setWordsTried] = useState<string[]>([]);
-
-  const [animation, setAnimation] = useState<string>('');
+  const [word, setWord] = useAtom(wordAtom);
+  const [currentWord, setCurrentWord] = useAtom(currentWordAtom);
+  const [currentRow, setCurrentRow] = useAtom(currentRowAtom);
+  const [, setAnimation] = useAtom(animationAtom);
+  const [wordsTried, setWordsTried] = useAtom(wordsTriedAtom);
+  const [, setErrorMessage] = useAtom(errorMessageAtom);
 
   useEffect(() => {
     newWord();
@@ -26,9 +27,11 @@ const App = () => {
     } else if (currentRow === 6) {
       alert("You lost !");
       location.reload();
-    } else if (word.length == currentWord.length) {      
+    } else if (word.length == currentWord.length) {
       setWordsTried([...wordsTried, currentWord]);
+
       setCurrentRow(currentRow + 1);
+      
       setCurrentWord('');
     }
   }, [currentWord, word, setCurrentWord, setCurrentRow, setAnimation]);
@@ -46,22 +49,23 @@ const App = () => {
     }
   }, [wordsTried])
 
-  const newWord = () => {
-    setWord(motsFrancais[Math.floor(Math.random() * motsFrancais.length)]);
+  const newWord = async () => {
+    try {
+      const response = await axios.get('https://trouve-mot.fr/api/random');
+      console.log(response.data[0].name);
+      setWord(response.data[0].name);
+    } catch (error) {
+      console.error(error);
+      setWord("ERROR");
+      setWordsTried(["ERROR", "ERROR", "ERROR", "ERROR", "ERROR", "ERROR"]);
+      setErrorMessage('An error occured while fetching the word');
+    }
   }
 
   return (
     <div className="bg">
-      <Grid
-        word={word}
-        currentWord={currentWord}
-        currentRow={currentRow}
-        wordsTried={wordsTried}
-        animation={animation}
-      />
-      <Footer
-        setCurrentWord={setCurrentWord}
-      />
+      <Grid/>
+      <Footer/>
     </div>
   )
 }
